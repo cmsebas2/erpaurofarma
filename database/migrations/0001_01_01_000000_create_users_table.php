@@ -17,6 +17,8 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
+            $table->enum('role', ['operario', 'calidad', 'direccion_tecnica', 'admin'])->default('operario');
+            $table->string('pin_firma')->nullable(); // Para firmas electronicas CFR 21 Part 11
             $table->rememberToken();
             $table->timestamps();
         });

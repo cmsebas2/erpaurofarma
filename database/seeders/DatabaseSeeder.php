@@ -15,11 +15,19 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // User::factory(10)->create();
+        \App\Models\User::updateOrCreate(
+            ['email' => 'admin@aurofarma.com'], 
+            [
+                'name' => 'Administrador Aurofarma',
+                'password' => \Illuminate\Support\Facades\Hash::make('password'),
+                'role' => 'admin'
+            ]
+        );
 
-        User::factory()->create([
-            'name' => 'Test User',
-            'email' => 'test@example.com',
+        $this->call([
+            AurofarmaSeeder::class,
+            ItemSeeder::class,
+            // QMutinSeeder::class, // Comentado para iniciar con 0 productos
         ]);
     }
 }
